@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2a09b295-a760-4a1c-8d07-5a11c4c39a17" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +54,7 @@
       <updated>1761765692507</updated>
       <workItem from="1761765694777" duration="803000" />
       <workItem from="1761766518435" duration="594000" />
-      <workItem from="1761767127352" duration="16000" />
+      <workItem from="1761767127352" duration="320000" />
     </task>
     <servers />
   </component>
