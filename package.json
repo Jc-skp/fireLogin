@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "live-server --port=8100 --entry-file=src/index.html",
+    "build": "echo 'Building...'",
+    "android": "npx cap open android",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,6 +22,12 @@
   },
   "homepage": "https://github.com/Jc-skp/fireLogin#readme",
   "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/app": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
     "firebase": "^12.4.0"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
   }
 }
