@@ -1,8 +1,0 @@
-{
-  "appId": "com.fireApp.fireLogin",
-  "appName": "fireLogin",
-  "webDir": "src",
-  "server": {
-    "androidScheme": "https"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "name": "fireLogin",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "custom"
-}
