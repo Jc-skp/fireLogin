@@ -1,0 +1,13 @@
+{
+  "appId": "com.jose.fireLogin",
+  "appName": "fireLogin",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 3000
+    }
+  }
+}

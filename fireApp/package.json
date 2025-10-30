@@ -1,0 +1,25 @@
+{
+  "name": "fireLogin",
+  "version": "1.0.0",
+  "description": "App de login com Ionic e Firebase",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "live-server src --port=8100 --open",
+    "build": "if exist www rmdir /s /q www && mkdir www && xcopy src\\* www\\ /E /I /Y",
+    "android": "npx cap open android",
+    "sync": "npm run build && npx cap sync"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.5.1",
+    "@capacitor/core": "^5.5.1",
+    "@capacitor/app": "^5.0.6",
+    "firebase": "^9.22.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^5.5.1",
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["ionic", "firebase", "login"],
+  "author": "Seu Nome",
+  "license": "MIT"
+}
