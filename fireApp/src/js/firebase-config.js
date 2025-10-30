@@ -1,12 +1,7 @@
-// Configuração do Firebase - SUBSTITUA COM SUAS CONFIGURAÇÕES
+// Configuração do Firebase
 console.log("Inicializando Firebase...");
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
+// SUAS CONFIGURAÇÕES - COLE AQUI AS REAIS DO FIREBASE
 const firebaseConfig = {
     apiKey: "AIzaSyAEtLpNWrcdRel5y394NVpq1sY560Nwftg",
     authDomain: "firelogin-4c37e.firebaseapp.com",
@@ -16,16 +11,18 @@ const firebaseConfig = {
     appId: "1:1014893701023:web:e8f6d0a395367984187faa"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-
 // Inicializar Firebase
 try {
-    firebase.initializeApp(firebaseConfig);
-    console.log("Firebase inicializado com sucesso!");
+    if (typeof firebase !== 'undefined') {
+        firebase.initializeApp(firebaseConfig);
+        console.log("Firebase inicializado com sucesso!");
+
+        // Tornar auth GLOBAL
+        window.auth = firebase.auth();
+        console.log("Auth definido como window.auth");
+    } else {
+        console.error("Firebase não está disponível");
+    }
 } catch (error) {
     console.error("Erro ao inicializar Firebase:", error);
 }
-
-const auth = firebase.auth();
-console.log("Auth inicializado:", auth ? "Sim" : "Não");

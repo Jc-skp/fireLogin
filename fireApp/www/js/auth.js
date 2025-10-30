@@ -1,8 +1,43 @@
+// Função para aguardar o auth ficar disponível
+function waitForAuth(callback) {
+    const maxAttempts = 50;
+    let attempts = 0;
+
+    function checkAuth() {
+        attempts++;
+        if (window.auth) {
+            console.log("✅ Auth encontrado após", attempts, "tentativas");
+            callback(window.auth);
+        } else if (attempts < maxAttempts) {
+            setTimeout(checkAuth, 100);
+        } else {
+            console.error("❌ Timeout: Auth não ficou disponível");
+            // Mostrar mensagem de erro para o usuário
+            const messageDiv = document.getElementById('message');
+            if (messageDiv) {
+                messageDiv.textContent = "Erro: Serviço de autenticação não carregou. Recarregue a página.";
+                messageDiv.className = "message error";
+            }
+        }
+    }
+
+    checkAuth();
+}
+
 // Aguardar o DOM carregar
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("Auth.js carregado!");
+    console.log("Auth.js carregado! Procurando auth...");
 
-    // Elementos DOM
+    waitForAuth(function(auth) {
+        console.log("✅ Iniciando configuração do auth...");
+        initializeAuth(auth);
+    });
+});
+
+function initializeAuth(auth) {
+    console.log("✅ Auth recebido:", auth ? "Sim" : "Não");
+
+    // DECLARAR TODAS AS VARIÁVEIS PRIMEIRO
     const loginForm = document.getElementById('login-form');
     const emailInput = document.getElementById('email');
     const passwordInput = document.getElementById('password');
@@ -32,32 +67,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
         messageDiv.textContent = message;
         messageDiv.className = `message ${type}`;
-        messageDiv.classList.remove('hidden');
-
-        // Auto-esconder mensagens de sucesso/info após 5 segundos
-        if (type === 'success' || type === 'info') {
-            setTimeout(() => {
-                hideMessage();
-            }, 5000);
-        }
     }
 
     function hideMessage() {
         if (messageDiv) {
-            messageDiv.classList.add('hidden');
+            messageDiv.className = 'message';
+            messageDiv.style.display = 'none';
         }
     }
 
     function showLoading() {
         if (loadingDiv && loginButton) {
-            loadingDiv.classList.remove('hidden');
+            loadingDiv.style.display = 'block';
             loginButton.disabled = true;
         }
     }
 
     function hideLoading() {
         if (loadingDiv && loginButton) {
-            loadingDiv.classList.add('hidden');
+            loadingDiv.style.display = 'none';
             loginButton.disabled = false;
         }
     }
@@ -71,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Mostrar a tela especificada
         if (screen) {
             screen.classList.add('active');
+            console.log("🔄 Tela ativada:", screen.id);
         }
     }
 
@@ -185,18 +214,44 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Logout
-    if (logoutButton) {
-        logoutButton.addEventListener('click', async () => {
+    // Configurar logout
+    function setupLogout() {
+        if (!logoutButton) {
+            console.error("❌ Botão de logout não encontrado!");
+            return;
+        }
+
+        console.log("✅ Botão de logout encontrado, configurando evento...");
+
+        // Remover event listeners antigos para evitar duplicação
+        const newLogoutButton = logoutButton.cloneNode(true);
+        logoutButton.parentNode.replaceChild(newLogoutButton, logoutButton);
+
+        newLogoutButton.addEventListener('click', async (e) => {
+            e.preventDefault();
+            console.log("🔄 Iniciando logout...");
+
             try {
-                console.log("Fazendo logout...");
+                showLoading();
                 await auth.signOut();
+                console.log("✅ Logout realizado com sucesso");
                 showMessage('Logout realizado com sucesso!', 'success');
+
+                // Forçar transição para tela de login
+                setTimeout(() => {
+                    showScreen(loginScreen);
+                    if (loginForm) loginForm.reset();
+                }, 1000);
+
             } catch (error) {
-                console.error('Erro no logout:', error);
-                showMessage('Erro ao fazer logout', 'error');
+                console.error('❌ Erro no logout:', error);
+                showMessage('Erro ao fazer logout: ' + error.message, 'error');
+            } finally {
+                hideLoading();
             }
         });
+
+        console.log("✅ Evento de logout configurado com sucesso");
     }
 
     // Listener para mudanças de autenticação
@@ -208,6 +263,12 @@ document.addEventListener('DOMContentLoaded', function() {
             if (userEmailSpan) userEmailSpan.textContent = user.email;
             showScreen(dashboardScreen);
             hideMessage();
+
+            // CONFIGURAR LOGOUT QUANDO USUÁRIO ESTÁ LOGADO
+            setTimeout(() => {
+                setupLogout();
+            }, 100);
+
         } else {
             // Usuário não está logado
             showScreen(loginScreen);
@@ -222,4 +283,4 @@ document.addEventListener('DOMContentLoaded', function() {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
-});
+}
