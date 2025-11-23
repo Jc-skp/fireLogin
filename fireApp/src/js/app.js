@@ -1,6 +1,6 @@
 // Inicialização do app
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('App Ionic carregado com sucesso!');
+    console.log('App IoT carregado com sucesso!');
 
     // Verificar se o Firebase está carregado
     if (typeof firebase === 'undefined') {
@@ -9,4 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     console.log('Firebase carregado corretamente');
+
+    setTimeout(() => {
+        console.log('📱 App pronto para uso!');
+    }, 1000);
 });

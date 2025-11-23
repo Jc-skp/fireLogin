@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login App</title>
+    <title>IoT Control App</title>
 
     <!-- Ionic Framework CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
@@ -19,73 +19,160 @@
 <ion-app>
     <ion-header>
         <ion-toolbar>
-            <ion-title>Login App</ion-title>
+            <ion-title>IoT Control App</ion-title>
         </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
         <!-- Tela de Login -->
         <div id="login-screen" class="screen active">
-            <div class="logo-container">
-                <ion-icon name="lock-closed" class="logo-icon"></ion-icon>
-                <h2>Bem-vindo</h2>
-                <p>Faça login para continuar</p>
-            </div>
-
-            <!-- Mensagens -->
-            <div id="message" class="message"></div>
-
-            <!-- Formulário -->
-            <form id="login-form">
-                <ion-item>
-                    <ion-label position="stacked">Email</ion-label>
-                    <ion-input type="email" id="email" placeholder="seu@email.com" required></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label position="stacked">Senha</ion-label>
-                    <ion-input type="password" id="password" placeholder="Sua senha" required></ion-input>
-                </ion-item>
-
-                <ion-button type="submit" expand="block" id="login-button" class="ion-margin-top">
-                    <ion-icon slot="start" name="log-in"></ion-icon>
-                    Entrar
-                </ion-button>
-
-                <div id="loading" class="loading">
-                    <ion-spinner name="crescent"></ion-spinner>
-                    <p>Processando...</p>
+            <div class="auth-container">
+                <div class="logo-container">
+                    <ion-icon name="hardware-chip" class="logo-icon"></ion-icon>
+                    <h2>Controle IoT</h2>
+                    <p>Faça login para acessar</p>
                 </div>
-            </form>
 
-            <div class="forgot-password">
-                <ion-button fill="clear" id="forgot-password-button" size="small">
-                    Esqueci minha senha
-                </ion-button>
+                <!-- Mensagens -->
+                <div id="message" class="message"></div>
+
+                <!-- Formulário de Login -->
+                <div class="form-container">
+                    <form id="login-form">
+                        <div class="form-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" class="form-control" placeholder="seu@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="login-password">Senha</label>
+                            <input type="password" id="login-password" class="form-control" placeholder="Sua senha" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Entrar
+                        </button>
+
+                        <div class="separator">
+                            <span>ou</span>
+                        </div>
+
+                        <!-- Login com Google -->
+                        <button type="button" class="btn btn-google" id="google-login-button">
+                            <span class="google-icon">G</span>
+                            Entrar com Google
+                        </button>
+
+                        <div id="login-loading" class="loading">
+                            <ion-spinner name="crescent"></ion-spinner>
+                            <p>Processando...</p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="auth-links">
+                    <a href="#" class="auth-link" id="forgot-password-button">Esqueci minha senha</a>
+                    <a href="#" class="auth-link" id="show-register-button">Criar nova conta</a>
+                </div>
             </div>
         </div>
 
-        <!-- Dashboard -->
+        <!-- Tela de Cadastro -->
+        <div id="register-screen" class="screen">
+            <div class="auth-container">
+                <div class="logo-container">
+                    <ion-icon name="person-add" class="logo-icon"></ion-icon>
+                    <h2>Criar Conta</h2>
+                    <p>Preencha seus dados</p>
+                </div>
+
+                <!-- Mensagens -->
+                <div id="register-message" class="message"></div>
+
+                <!-- Formulário de Cadastro -->
+                <div class="form-container">
+                    <form id="register-form">
+                        <div class="form-group">
+                            <label for="register-name">Nome Completo</label>
+                            <input type="text" id="register-name" class="form-control" placeholder="Seu nome completo" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" class="form-control" placeholder="seu@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-password">Senha</label>
+                            <input type="password" id="register-password" class="form-control" placeholder="Mínimo 6 caracteres" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register-confirm-password">Confirmar Senha</label>
+                            <input type="password" id="register-confirm-password" class="form-control" placeholder="Digite novamente" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Criar Conta
+                        </button>
+
+                        <div class="separator">
+                            <span>ou</span>
+                        </div>
+
+                        <!-- Cadastro com Google -->
+                        <button type="button" class="btn btn-google" id="google-register-button">
+                            <span class="google-icon">G</span>
+                            Cadastrar com Google
+                        </button>
+
+                        <div id="register-loading" class="loading">
+                            <ion-spinner name="crescent"></ion-spinner>
+                            <p>Criando conta...</p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="auth-links">
+                    <a href="#" class="auth-link" id="show-login-button">Já tenho uma conta</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard IoT -->
         <div id="dashboard-screen" class="screen">
-            <div class="welcome-container">
-                <ion-icon name="checkmark-circle" class="success-icon"></ion-icon>
-                <h2>Login realizado com sucesso!</h2>
-                <p id="user-email"></p>
-                <ion-button expand="block" id="logout-button" class="ion-margin-top" color="danger">
-                    <ion-icon slot="start" name="log-out"></ion-icon>
-                    Sair
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <ion-icon name="person-circle" class="user-avatar"></ion-icon>
+                    <div class="user-details">
+                        <h3 id="user-display-name">Usuário</h3>
+                        <p id="user-email">email@exemplo.com</p>
+                    </div>
+                </div>
+                <ion-button fill="clear" id="logout-button" color="medium">
+                    <ion-icon slot="icon-only" name="log-out"></ion-icon>
                 </ion-button>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="welcome-message">
+                    <ion-icon name="hardware-chip" class="welcome-icon"></ion-icon>
+                    <h2>Bem-vindo ao Controle IoT!</h2>
+                    <p>Em breve você poderá controlar dispositivos Arduino aqui.</p>
+                    <ion-button expand="block" color="primary" class="ion-margin-top">
+                        <ion-icon slot="start" name="construct"></ion-icon>
+                        Configurar Dispositivos
+                    </ion-button>
+                </div>
             </div>
         </div>
     </ion-content>
 </ion-app>
 
-<!-- Ionic JS -->
-<script src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
-
 <!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
 <!-- Nossos Scripts -->
 <script src="js/firebase-config.js"></script>
