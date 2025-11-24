@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/fireApp/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fireApp/src/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fireApp/src/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fireApp/src/js/firebase-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/firebase-config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +82,7 @@
       <workItem from="1761767127352" duration="320000" />
       <workItem from="1761779031710" duration="1167000" />
       <workItem from="1761780225602" duration="14665000" />
-      <workItem from="1763927207339" duration="4184000" />
+      <workItem from="1763927207339" duration="9044000" />
     </task>
     <servers />
   </component>

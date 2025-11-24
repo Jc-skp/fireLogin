@@ -169,14 +169,34 @@
     </ion-content>
 </ion-app>
 
-<!-- Firebase -->
+<!-- 1. Firebase SDKs PRIMEIRO -->
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 
-<!-- Nossos Scripts -->
+<!-- 2. Nossa configuração do Firebase -->
 <script src="js/firebase-config.js"></script>
+
+<!-- 3. Nossos scripts de aplicação -->
 <script src="js/auth.js"></script>
 <script src="js/app.js"></script>
+
+
+<div id="password-reset-modal" class="password-reset-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Recuperar Senha</h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <p>Digite seu email para receber um link de redefinição de senha:</p>
+        <div class="form-group">
+            <input type="email" id="reset-email-input" class="form-control" placeholder="seu@email.com">
+        </div>
+        <div class="modal-actions">
+            <button class="btn btn-cancel">Cancelar</button>
+            <button class="btn btn-primary" id="send-reset-email">Enviar Email</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>

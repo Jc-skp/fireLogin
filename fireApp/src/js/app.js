@@ -1,16 +1,16 @@
 // Inicialização do app
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('App IoT carregado com sucesso!');
+// js/app.js
+console.log('📱 App IoT carregado com sucesso!');
 
-    // Verificar se o Firebase está carregado
-    if (typeof firebase === 'undefined') {
-        console.error('Firebase não carregado!');
-        return;
+// Funções auxiliares simples
+function navigateTo(screenId) {
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => screen.classList.remove('active'));
+
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
     }
+}
 
-    console.log('Firebase carregado corretamente');
-
-    setTimeout(() => {
-        console.log('📱 App pronto para uso!');
-    }, 1000);
-});
+console.log('✅ App pronto para uso!');
