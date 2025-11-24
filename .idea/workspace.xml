@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="2a09b295-a760-4a1c-8d07-5a11c4c39a17" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fireApp/src/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fireApp/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fireApp/src/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fireApp/src/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fireApp/src/js/firebase-config.js" beforeDir="false" afterPath="$PROJECT_DIR$/fireApp/src/js/firebase-config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +78,8 @@
       <workItem from="1761767127352" duration="320000" />
       <workItem from="1761779031710" duration="1167000" />
       <workItem from="1761780225602" duration="14665000" />
-      <workItem from="1763927207339" duration="9044000" />
+      <workItem from="1763927207339" duration="10020000" />
+      <workItem from="1764024174517" duration="835000" />
     </task>
     <servers />
   </component>
