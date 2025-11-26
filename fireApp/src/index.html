@@ -155,32 +155,107 @@
             </div>
 
             <div class="dashboard-content">
-                <div class="welcome-message">
-                    <ion-icon name="hardware-chip" class="welcome-icon"></ion-icon>
-                    <h2>Bem-vindo ao Controle IoT!</h2>
-                    <p>Em breve você poderá controlar dispositivos Arduino aqui.</p>
-                    <ion-button expand="block" color="primary" class="ion-margin-top">
-                        <ion-icon slot="start" name="construct"></ion-icon>
-                        Configurar Dispositivos
-                    </ion-button>
+                <!-- Status MQTT -->
+                <div class="mqtt-status-card">
+                    <div class="status-header">
+                        <h3><ion-icon name="cloud" class="status-icon"></ion-icon> Status MQTT</h3>
+                        <span id="mqtt-status" class="status-badge disconnected">Desconectado</span>
+                    </div>
+                    <div class="status-actions">
+                        <button id="connect-mqtt" class="btn btn-primary">Conectar</button>
+                        <button id="disconnect-mqtt" class="btn btn-outline">Desconectar</button>
+                    </div>
                 </div>
-                <div class="iot-controls">
-                    <div class="row">
-                        <div class="col">
-                            <div class="device-card">
-                                <ion-icon name="bulb" class="device-icon"></ion-icon>
-                                <h3>LED</h3>
-                                <p>Controle de iluminação</p>
-                                <button class="btn btn-primary" id="led-toggle">Ligar</button>
+
+                <!-- Controles de Saída -->
+                <div class="control-section">
+                    <h3><ion-icon name="construct"></ion-icon> Controles</h3>
+                    <div class="controls-grid">
+                        <div class="control-card">
+                            <ion-icon name="bulb" class="control-icon"></ion-icon>
+                            <h4>LED</h4>
+                            <p class="control-description">Controle de iluminação</p>
+                            <div class="control-actions">
+                                <button class="btn btn-success led-btn" data-state="on">Ligar</button>
+                                <button class="btn btn-danger led-btn" data-state="off">Desligar</button>
+                            </div>
+                            <div class="control-status">
+                                <span class="status-label">Estado:</span>
+                                <span id="led-status" class="status-value">Desconhecido</span>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="device-card">
-                                <ion-icon name="thermometer" class="device-icon"></ion-icon>
-                                <h3>Sensor Temperatura</h3>
-                                <p id="temperature-value">-- °C</p>
-                                <button class="btn btn-outline" id="refresh-temp">Atualizar</button>
+
+                        <div class="control-card">
+                            <ion-icon name="cog" class="control-icon"></ion-icon>
+                            <h4>Motor</h4>
+                            <p class="control-description">Controle de motor</p>
+                            <div class="control-actions">
+                                <button class="btn btn-success motor-btn" data-state="on">Ligar</button>
+                                <button class="btn btn-danger motor-btn" data-state="off">Desligar</button>
                             </div>
+                            <div class="control-status">
+                                <span class="status-label">Estado:</span>
+                                <span id="motor-status" class="status-value">Desconhecido</span>
+                            </div>
+                        </div>
+
+                        <div class="control-card">
+                            <ion-icon name="color-palette" class="control-icon"></ion-icon>
+                            <h4>RGB LED</h4>
+                            <p class="control-description">Controle de cor</p>
+                            <div class="color-controls">
+                                <input type="color" id="rgb-color" value="#ff0000" class="color-picker">
+                                <button id="set-color" class="btn btn-primary">Aplicar Cor</button>
+                            </div>
+                            <div class="control-status">
+                                <span class="status-label">Cor:</span>
+                                <span id="color-status" class="status-value">#FF0000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leituras de Sensores -->
+                <div class="sensor-section">
+                    <h3><ion-icon name="pulse"></ion-icon> Leituras dos Sensores</h3>
+                    <div class="sensors-grid">
+                        <div class="sensor-card">
+                            <ion-icon name="thermometer" class="sensor-icon temperature"></ion-icon>
+                            <h4>Temperatura</h4>
+                            <div class="sensor-value" id="temperature-value">-- °C</div>
+                            <div class="sensor-meta">Atualizado: <span id="temp-time">--</span></div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <ion-icon name="sunny" class="sensor-icon luminosity"></ion-icon>
+                            <h4>Luminosidade</h4>
+                            <div class="sensor-value" id="luminosity-value">-- Lux</div>
+                            <div class="sensor-meta">Atualizado: <span id="luminosity-time">--</span></div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <ion-icon name="water" class="sensor-icon humidity"></ion-icon>
+                            <h4>Umidade</h4>
+                            <div class="sensor-value" id="humidity-value">-- %</div>
+                            <div class="sensor-meta">Atualizado: <span id="humidity-time">--</span></div>
+                        </div>
+
+                        <div class="sensor-card">
+                            <ion-icon name="speedometer" class="sensor-icon pressure"></ion-icon>
+                            <h4>Pressão</h4>
+                            <div class="sensor-value" id="pressure-value">-- hPa</div>
+                            <div class="sensor-meta">Atualizado: <span id="pressure-time">--</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log de Mensagens -->
+                <div class="log-section">
+                    <h3><ion-icon name="list"></ion-icon> Log de Mensagens</h3>
+                    <div class="log-container">
+                        <div id="mqtt-log" class="log-messages"></div>
+                        <div class="log-actions">
+                            <button id="clear-log" class="btn btn-outline">Limpar Log</button>
                         </div>
                     </div>
                 </div>
@@ -218,5 +293,10 @@
         </div>
     </div>
 </div>
+<!-- Biblioteca MQTT -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
+
+<!-- Nosso MQTT Client -->
+<script src="js/mqtt.js"></script>
 </body>
 </html>
