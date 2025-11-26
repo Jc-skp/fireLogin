@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>IoT Control App</title>
 
     <!-- Ionic Framework CSS -->
@@ -17,13 +17,8 @@
 </head>
 <body>
 <ion-app>
-    <ion-header>
-        <ion-toolbar>
-            <ion-title>IoT Control App</ion-title>
-        </ion-toolbar>
-    </ion-header>
 
-    <ion-content class="ion-padding">
+    <ion-content class="ion-padding" fullscreen>
         <!-- Tela de Login -->
         <div id="login-screen" class="screen active">
             <div class="auth-container">
@@ -142,16 +137,16 @@
         <!-- Dashboard IoT -->
         <div id="dashboard-screen" class="screen">
             <div class="dashboard-header">
+                <ion-icon name="person-circle" class="user-avatar"></ion-icon>
+
                 <div class="user-info">
-                    <ion-icon name="person-circle" class="user-avatar"></ion-icon>
-                    <div class="user-details">
-                        <h3 id="user-display-name">Usuário</h3>
-                        <p id="user-email">email@exemplo.com</p>
-                    </div>
+                    <h3 id="user-display-name">Usuário</h3>
+                    <p id="user-email">email@exemplo.com</p>
                 </div>
-                <ion-button fill="clear" id="logout-button" color="medium">
-                    <ion-icon slot="icon-only" name="log-out"></ion-icon>
-                </ion-button>
+
+                <button id="logout-button" class="logout-btn">
+                    <ion-icon name="log-out" class="logout-icon"></ion-icon>
+                </button>
             </div>
 
             <div class="dashboard-content">
@@ -184,8 +179,6 @@
                                 <span id="led-status" class="status-value">Desconhecido</span>
                             </div>
                         </div>
-
-                        </div>
                     </div>
                 </div>
 
@@ -206,7 +199,6 @@
                             <div class="sensor-value" id="humidity-value">-- %</div>
                             <div class="sensor-meta">Atualizado: <span id="humidity-time">--</span></div>
                         </div>
-
                     </div>
                 </div>
 
@@ -225,19 +217,7 @@
     </ion-content>
 </ion-app>
 
-<!-- 1. Firebase SDKs PRIMEIRO -->
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-
-<!-- 2. Nossa configuração do Firebase -->
-<script src="js/firebase-config.js"></script>
-
-<!-- 3. Nossos scripts de aplicação -->
-<script src="js/auth.js"></script>
-<script src="js/app.js"></script>
-
-
+<!-- Modal de recuperação de senha -->
 <div id="password-reset-modal" class="password-reset-modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -254,10 +234,16 @@
         </div>
     </div>
 </div>
-<!-- Biblioteca MQTT -->
+
+<!-- Scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js" type="text/javascript"></script>
 
-<!-- Nosso MQTT Client -->
+<script src="js/firebase-config.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/app.js"></script>
 <script src="js/mqtt.js"></script>
 </body>
 </html>
